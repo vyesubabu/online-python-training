@@ -1,0 +1,47 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:nil todo:t |:t
+#+TITLE: What Is Git, Github and Why Do You Care
+#+DATE: <2016-04-26 Tue>
+#+AUTHOR: chastang
+#+EMAIL: chastang@ucar.edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.4)
+
+
+* Org Export Set up (Internal Only)                                :noexport:
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none 
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+* What Is Git, Github and Why Do You Care
+
+** Motivation
+
+When you start writing computer programs and Jupyter notebooks, you will need to save and keep track of your work as your code gains complexity. Moreover, you may want to share and collaborate on projects with other developers in your office or around the world. Or perhaps you aim to contribute and improve someone else's program. Version control software and distributed version control software satisfies these objectives and are now an essential tool for any software developer beginner or expert alike. It will be to your advantage to learn about version control early on.
+
+** git
+
+Version control has existed for decades and has gone through many incarnations. git is an implementation of distributed  version control technology that is currently popular and powerful. Git stands in contrast to centralized version control systems like SVN which you may have heard of. Git was originally developed by legendary programmer Linus Torvalds, creator the Linux operating system. Unhappy with the available choices, Linus wrote his own version control software to collaborate on the Linux operating system. Git gained popularity with developers enabling a huge number of contributions to Linux making it the most successful open source project today. The benefits of git were not isolated to the Linux operating system. Many projects such as the scientific plotting library [[http://matplotlib.org/][matplotlib]] have adopted git and in doing so have seen a [[https://jakevdp.github.io/blog/2012/09/20/why-python-is-the-last/][marked increased in collaboration and contributions]]. When you leverage the power of the community, an enormous amount of work can get done.
+
+** github
+
+[[https://github.com/][github]] is a website that hosts git projects for free. There is a good chance your favorite open source software project is on github. It comes with value added tools to help you keep track of issues and collaborate with colleagues. [[https://github.com/Unidata/netcdf-c][Unidata has numerous projects on github]], including this website, and other Python related projects such as [[https://github.com/Unidata/netcdf4-python][netcdf4-python]], the [[https://github.com/Unidata/unidata-python-workshop][Unidata Python Workshop]], [[https://github.com/metpy/MetPy][Metpy]], [[https://github.com/Unidata/siphon][Siphon]]. Incidentally, when using git, you are not forced to use github for your project hosting. It is one of many options for git hosting including [[https://bitbucket.org/][BitBucket]], [[https://gitlab.com][GitLab]], or simply self-hosting.
+
+** git in the Geosciences
+
+Several projects in the geoscience community have adopted git for their software projects:
+
+- [[https://github.com/CESM-Development][Community Earth System Model (CESM)]]
+- [[https://github.com/MPAS-Dev][Model for Prediction Across Scales (MPAS)]]
+- [[https://github.com/Unidata/netcdf-c][netcdf]]
+- [[https://github.com/SciTools/cartopy][cartopy]]
+
+** Learning git
+
+Now that you know all about the benefits of git, we must tell you that git does come with a downside of being complex and not always user friendly, especially for beginners. Therefore, the remainder of this section concerns curated resources to learn git. We also suggest you take some time in advance to learn git, rather than immediately start experimenting with git from the command line or a user interface. Having some understanding of how git works ahead of time will save you much frustration.

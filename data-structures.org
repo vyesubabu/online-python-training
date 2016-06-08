@@ -1,0 +1,211 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:nil todo:t |:t
+#+TITLE: Basic Data Structures
+#+DATE: <2016-05-15 Sun>
+#+AUTHOR: chastang
+#+EMAIL: chastang@ucar.edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.4)
+
+#+PROPERTY: header-args :session :exports both :results output verbatim
+#+PROPERTY: tangle "./data-structures.py"
+
+* Org Export Set up (Internal Only)                                :noexport:
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none :tangle no
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+* Basic Data Structures
+** What are Data Structures
+
+Imagine you want to plot precipitation measurements from a rain gauge on a bar graph. Your first step will be to put the precipitation data inside a Python data structure. Data structures are how computer programs store information. This information can subsequently be processed, analyzed and visualized.
+
+There are many different types of data structures depending on the kind of data you wish to store. You will have to choose data structures that best meet your requirements for the problem you are trying to solve. Fortunately, Python as a "batteries-included" language gives you a practical choice of data structures to select from. We will do a minimal exploration of Python data structures; just enough to get you going. For a more complete treatment of Python data structures, see the [[https://docs.python.org/3/tutorial/datastructures.html][Data Structures]] section in the Python documentation.
+
+** Python Data Structures
+
+First, scientific data can be large and complex and may require data structures appropriate for /scientific/ programming. We cover Python for scientific data further along in the "Scientific Python Package" section. This section covers basic Python data structures meant for general-purpose programming, necessary to write programs in any capacity. Choosing the right data structure for the problem you are targeting will help your programs run correctly and efficiently, and make them easier for others to understand.
+
+***  Sequences
+
+Python offers several data structures to store sequences of information such as hourly barometric pressure readings from a weather station, or three-dimensional coordinates describing a location in a  climate model. To accommodate storage of such data, Python has a few different choices. We will discuss two of them: lists and tuples.
+
+**** List
+
+A Python list is a sequence of values that are usually the same kind of item. They are ordered, which means items of a list stay in the order they are inserted in. They can contain strings, numbers, or more complex items. Lists are mutable, which is a fancy way of saying they can be changed after they are created. Here is a Python list of [[https://www3.epa.gov/climatechange/science/indicators/ghg/ghg-concentrations.html][decadal concentrations of carbon dioxide (ppm) measured at the Mauna Loa observatory]] from 1970 to 2010 assigned to the ~co2~ variable.
+
+#+BEGIN_SRC ipython
+  co2 = [325.68, 338.68, 354.35, 371.13, 387.37]
+  print(co2)
+#+END_SRC
+
+#+RESULTS:
+: [325.68, 338.68, 354.35, 371.13, 387.37]
+
+The list is demarcated with square brackets, the values are comma delimited and assigned to the ~co2~ variable with the ~=~ assignment operator.
+
+***** What Can You Do with a List?
+
+Once you have created your list, there are many options to further manipulate the list. We will examine just a few examples.
+
+****** Add an Item to the End of the List
+
+Continuing with our list of carbon dioxide concentrations, we want to add a prediction for the year 2020 of 400.0 ppm to the ~co2~ list. We can use the ~append~ /method/ to add an item to the end of the list. (A method is like a function, but denoted with the ~.~ notation after the variable it is acting on. Instead of ~append(co2, 400.0)~ you have ~co2.append(400.0)~.)
+
+#+BEGIN_SRC ipython
+  co2.append(400.0)
+  print(co2)
+#+END_SRC
+
+#+RESULTS:
+: [325.68, 338.68, 354.35, 371.13, 387.37, 400.0]
+
+****** Add an Item to the Front of the List
+
+The carbon dioxide concentration in 1960 at Mauna Loa was 316.91 ppm. We can use the ~insert~ method, to add an item to the list at the location of our choosing, in this case location or index ~0~. (Python sequences start at index ~0~, not ~1~ like Matlab or Fortran.)
+
+#+BEGIN_SRC ipython 
+  co2.insert(0, 316.91)
+  print(co2)
+#+END_SRC
+
+#+RESULTS:
+: [316.91, 325.68, 338.68, 354.35, 371.13, 387.37, 400.0]
+
+****** Change a Value in the List
+
+We want to improve our estimate of the year 2020 carbon dioxide concentration to a value of 401.0 ppm. We will access the 7th value on the list with the square bracket notation.
+
+#+BEGIN_SRC ipython 
+  co2[6] = 401.0  # Remember, 7th item at index 6 because we start at 0, not 1
+  print(co2)
+#+END_SRC
+
+#+RESULTS:
+: [316.91, 325.68, 338.68, 354.35, 371.13, 387.37, 401.0]
+
+**** Tuples
+
+Tuples are also ordered sequences of information but they are immutable, which means once they are created,they cannot change. Immutability may seem like a strange concept given that computer programs are constantly manipulating and changing data, but your program becomes easier to understand when you can guarantee something is unchanging. Tuples tend to contain related items such as an x and y locations in a Cartesian plane, or an author, title and journal in a scholarly citation.
+
+Here we define a tuple representing a geographic coordinate expressed latitude, longitude and elevation in meters:
+
+#+BEGIN_SRC ipython :exports code :results none
+  location = (40.0, -105.3, 1655.1)
+#+END_SRC
+
+The tuple definition is demarcated with parentheses, the values are comma delimited and assigned to the ~location~ variable with the ~=~ assignment operator. Because tuples are immutable, unlike lists, there are no operations to change them in-place.
+
+**** Built-in Functions for Lists and Tuples
+
+There are several [[https://docs.python.org/3/library/functions.html][built-in Python functions]] to examine both lists and tuples. Let's look at a few. We can find out the length of the tuple or list with the built-in Python ~len~ function:
+
+#+BEGIN_SRC ipython  
+  print(len(co2))
+#+END_SRC
+
+#+RESULTS:
+: 7
+
+We can also discover the min and max of a sequence:
+
+#+BEGIN_SRC ipython  
+  print(min(co2), max(co2))
+#+END_SRC
+
+#+RESULTS:
+: 316.91 401.0
+
+**** Accessing Data from Lists and Tuples
+
+Python offers a rich variety of options to access values inside lists and tuples, and you will want to eventually understand [[https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy][indexing, slicing and striding expressions]]. For brevity, we will only examine a couple of examples to get values inside sequences. Again, note valid indices on lists and tuples start at 0 and end at size of list - 1.
+
+***** Indexing
+
+Individual items inside the list can be obtained with the square bracket notation. Here will assign a couple of values from inside the list to two variables: ~co2_1960~ and ~co2_2010~. We will the print the values with [[https://docs.python.org/3/library/string.html#format-string-syntax][Python 3 positional formatting]].
+
+#+BEGIN_SRC ipython  
+  co2_1960 = co2[0]  # index 0 at 1960
+  co2_2010 = co2[5]  # index 5 at 2010
+  print('Mauna Loa carbon dioxide concentration '
+        'in 1960 was {0} ppm and '
+        'in 2010 was {1} ppm.'.format(co2_1960, co2_2010))
+#+END_SRC
+ 
+#+RESULTS:
+: Mauna Loa carbon dioxide concentration in 1960 was 316.91 ppm and in 2010 was 387.37 ppm.
+
+***** Multiple Assignments for Unpacking Tuples
+
+Python sequences also allow for multiple assignments for unpacking. This trick is quite handy for tuples:
+
+#+BEGIN_SRC ipython
+lat, lon, elev = location  # unpacking the tuple
+print('lat {0}, lon {1}, elevation {2}'.format(lat, lon, elev))
+#+END_SRC
+
+#+RESULTS:
+: lat 40.0, lon -105.3, elevation 1655.1
+
+*** Dictionaries
+
+Dictionary data structures are easy to understand because you are already familiar with them. When you look up a word definition in a language dictionary or use an index in the back of a book, you are using a dictionary data structure. Dictionaries are composed of key and value pairs. For example,
+
+#+BEGIN_QUOTE
+hydrometeors - an atmospheric phenomenon or entity involving water or water vapor, such as rain or a cloud
+#+END_QUOTE
+
+Here, the key is "hydrometeors" and the value is "an atmospheric phenomenon or entity involving water or water vapor, such as rain or a cloud."
+
+Let's build upon the earlier tuple example by defining a dictionary of [[https://en.wikipedia.org/wiki/METAR][METAR weather stations]]. The keys are strings representing the METAR station name,the values are tuples representing the location of the station expressed in latitude,longitude and elevation in meters.
+
+#+BEGIN_SRC ipython :exports code :results none
+  metars = {
+      'KPRG': (48.96, 2.44, 66),
+      'FAGM': (-26.24, 28.15, 1671),
+      'KNYC': (40.71, -74.01, 10)}
+#+END_SRC
+
+Unlike lists and tuples, dictionaries are unordered; entries in a dictionary are not in the order they are inserted in and you cannot rely on any predictable ordering. This is not a problem as you will be using Python dictionary operations to look up the information contained within the dictionary.
+
+***** What Can You Do with a Dictionary?
+
+****** Look up a Value in a Dictionary
+
+Let's look up the METAR location for ~KNYC~.
+
+#+BEGIN_SRC ipython 
+  print(metars['KNYC'])
+#+END_SRC
+
+#+RESULTS:
+: (40.71, -74.01, 10)
+
+****** Add a Value in a Dictionary
+Let's add the METAR station ~SBSP~ for São Paulo, Brazil to our METAR dictionary:
+
+#+BEGIN_SRC ipython :exports code :results none
+  metars['SBSP'] = (-23.63, -46.66, 801)
+#+END_SRC
+
+Note that the keys in dictionary data structures are unique. This means,for example,  that if you  provide a more accurate location for the São Paulo METAR, then that new key will replace the old one:
+
+#+BEGIN_SRC ipython 
+  metars['SBSP'] = (-23.627, -46.655, 803.1)
+  print(metars['SBSP'])
+#+END_SRC
+
+#+RESULTS:
+: (-23.627, -46.655, 803.1)
+
+There will not be two ~SBSP~ keys in the dictionary.
+
+** Further Reading
+
+There are many topics concerning Python data structures that we did not cover in the interest of brevity. We encourage you to research more elaborate [[https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy][indexing,slicing and striding expressions]]. Also, we did not cover [[https://docs.python.org/3/tutorial/datastructures.html#sets][Sets]] which is a data structure composed of unique,unordered values similar to keys in a dictionary data structure. There are several valuable built-in Python functions that merit study: [[https://docs.python.org/3/library/functions.html#filter][filter]], [[https://docs.python.org/3/library/functions.html#map][map]], [[https://docs.python.org/3/library/functions.html#sorted][sorted]] functions to name a few. Lastly, in the "Flow Control" section, we will examine Python list comprehension to process information inside of sequences and dictionaries.

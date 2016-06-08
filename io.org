@@ -1,0 +1,448 @@
+<<<<<<< HEAD
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+=======
+#+OPTIONS: ':nil *:t -:t ::t <:t H:6 \n:nil ^:t arch:headline author:t c:nil
+>>>>>>> 87fcf63... io
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:nil todo:t |:t
+#+TITLE: Basic Input and Output
+<<<<<<< HEAD
+#+DATE: <2016-05-26 Thu>
+#+AUTHOR: chastang
+=======
+#+DATE: <2016-06-07 Tue>
+#+AUTHOR: Julien Chastang
+>>>>>>> 87fcf63... io
+#+EMAIL: chastang@ucar.edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.4)
+
+#+PROPERTY: header-args :session :exports both :results output verbatim
+#+PROPERTY: tangle "./io.py"
+
+* Org Export Set up (Internal Only)                                :noexport:
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none :tangle no
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+* Basic Input and Output
+** What is Input and Output?
+<<<<<<< HEAD
+With apologies to John Donne, no program is an island. Python programs run in a  larger computing environment. They may *input* information from the computer or across the Internet. Or they may *output* information displayed to the screen or written to a file. These are examples of input and output or "I/O" in computer science parlance. In this section, we will cover the basics of Python I/O by examining string formatting, reading and writing information to files, and finally looking at a real world example involving snow depth data.
+** Strings and String Formatting
+*** Strings
+In computer programming, a string is a sequence of letters or other characters. "Graupel" string is a sequence of the characters ~G~, ~r~, ~a~, ~u~, ~p~, ~e~, ~l~. When you have strings to print to the screen, you will use the [[https://docs.python.org/2/library/functions.html#print][~print()~]] function. For example:
+=======
+With apologies to John Donne, no program is an island. Python programs run in a larger computing environment. They may *input* information from the computer or across the Internet. Or they may *output* information displayed to the screen or written to a file. These are examples of input and output or "I/O" in computer science parlance. In this section, we will cover the basics of Python I/O by examining string formatting, reading, and writing information to files. Finally, we will delve into a real world example involving snow depth data.
+** Strings and String Formatting
+*** Strings
+In computer programming, a string is a sequence of letters or other characters. The "Graupel" string is a sequence of the characters ~G~, ~r~, ~a~, ~u~, ~p~, ~e~, ~l~. You can print strings to the screen with the [[https://docs.python.org/2/library/functions.html#print][~print()~]] function. For example:
+>>>>>>> 87fcf63... io
+
+#+BEGIN_SRC ipython :session
+  print("Graupel")
+#+END_SRC
+
+#+RESULTS:
+: Graupel
+
+Python strings can either be enclosed in single or double quotes. They can hold not just a single word, but any amount of text such as a paragraph of prose or web page content. They can be assigned to variables just like any other Python data type:
+
+<<<<<<< HEAD
+#+BEGIN_SRC ipython :session
+  precip = "Graupel"
+#+END_SRC
+
+Strings are immutable so they cannot be changed in-place similar to tuples. (See the data structures section for a discussion on immutability.) Indeed, strings can be manipulated in a similar manner to tuples. Python strings are [[https://docs.python.org/3/library/stdtypes.html#str][str]] objects and support [[https://docs.python.org/3/library/stdtypes.html#str][many methods]] to act upon them such as [[https://docs.python.org/2/library/stdtypes.html#str.split][split]], [[https://docs.python.org/2/library/stdtypes.html#str.join][join]] and [[https://docs.python.org/2/library/stdtypes.html#str.replace][replace]]. Remember, strings are immutable so any method that "changes" a string really returns a new string. The original string remains the same.
+=======
+#+BEGIN_SRC ipython :session :results none
+  precip = "Graupel"
+#+END_SRC
+
+Strings are immutable so they cannot be changed in-place similar to tuples. (See the data structures section for a discussion on immutability.) Indeed, strings can be manipulated in a similar manner to tuples. Python strings are [[https://docs.python.org/3/library/stdtypes.html#str][~str~]]  objects and support [[https://docs.python.org/3/library/stdtypes.html#str][many methods]] to act upon them such as [[https://docs.python.org/3/library/stdtypes.html#str.split][~split()~]], [[https://docs.python.org/3/library/stdtypes.html#str.join][~join()~]] and [[https://docs.python.org/3/library/stdtypes.html#str.replace][~replace()~]]. Remember, strings are immutable so any method that "changes" a string really returns a new string. The original string remains the same.
+>>>>>>> 87fcf63... io
+
+*** String Formatting
+
+In any realistic program, you will typically incorporate variable information into a string. Imagine you have a Python program that analyzes radar reflectivity data from thunderstorms and will convey that information to the user. For example, consider this string: 
+
+#+BEGIN_QUOTE
+The peak reflectivity of the thunderstorm cell is 50 dBZ. 
+#+END_QUOTE
+
+<<<<<<< HEAD
+In this string the number "50" is variable depending on the data analyzed within the program, while the rest of the string is constant. Python offers several possibilities to print such strings but the best and most powerful way is with [[https://docs.python.org/3/library/stdtypes.html#str.format][Python 3 positional formatting]]. 
+=======
+In this string the number "50" is variable depending on the data analyzed within the program, while the rest of the string is constant. Python offers several possibilities to print such strings but the best and most powerful is [[https://docs.python.org/3/library/stdtypes.html#str.format][Python 3 positional formatting]]. 
+>>>>>>> 87fcf63... io
+
+**** Python 3 Positional Formatting
+
+In positional formatting, there is a "literal" or unchanging part of the string and zero or more replacement fields denoted by the ~{}~ curly braces. For example,
+
+#+BEGIN_SRC ipython :session
+<<<<<<< HEAD
+  reflectivity = "The peak reflectivity of the thunderstorm cell is {}"\
+                 " dBZ.".format(50)
+  print(reflectivity)
+=======
+  print("The peak reflectivity of the thunderstorm cell is {} dBZ.".format(50))
+>>>>>>> 87fcf63... io
+#+END_SRC
+
+#+RESULTS:
+: The peak reflectivity of the thunderstorm cell is 50 dBZ.
+
+<<<<<<< HEAD
+(The ~\~ character here serves no purpose other than to continue the Python statement to the next line.) The curly braces are swapped out with the arguments of the ~format~ method which can take zero or more arguments that will match the curly braces.
+
+[[https://docs.python.org/3/library/string.html#formatstrings][Formatting syntax can be quite elaborate]] and is a [[https://docs.python.org/3/library/string.html#format-specification-mini-language][mini-language]] within Python. For brevity, we will not cover this topic exhaustively, but we will look at a few examples that examine formatting numbers, a common concern scientific programming. 
+
+***** Decimal Numbers
+
+Let's look more closely at an example of positional formatting involving decimal numbers.
+
+#+BEGIN_SRC ipython :session
+  print("unity is {}, e is {:.2f} and pi is {:.3f}".format(1, 2.718281, 3.141592))
+=======
+The curly braces are swapped out with the arguments of the ~format~ method which can take zero or more arguments that will match the curly braces.
+
+[[https://docs.python.org/3/library/string.html#formatstrings][Formatting syntax can be quite elaborate]] and is a [[https://docs.python.org/3/library/string.html#format-specification-mini-language][mini-language]] within Python. For brevity, we will not cover this topic in any depth, but we will look at a few examples that examine formatting numbers, a common concern in scientific programming. 
+
+***** Decimal Numbers
+
+We will look more closely at positional formatting involving decimal numbers.
+
+#+BEGIN_SRC ipython :session
+  print("unity is {}, e is {:.2f} and pi is {:.3f}".format(1, 2.71828, 3.14159))
+>>>>>>> 87fcf63... io
+#+END_SRC
+
+#+RESULTS:
+: unity is 1, e is 2.72 and pi is 3.142
+
+<<<<<<< HEAD
+Let's study the ~{:.2f}~ field. The ~:~ signifies the start of the string formatting, the ~.2~ describes the precision of the number after the decimal place (in this case ~2~ two places) . The ~f~ denotes we want a fixed number of digits after the decimal point. (Note, the formatted numbers have been properly rounded.)
+=======
+Let's study the ~{:.2f}~ field. The ~:~ signifies the start of the string formatting, the ~.2~ describes the precision of the number after the decimal place (in this case two places) . The ~f~ denotes we want a decimal number with a fixed number of digits after the decimal point. (Note, the formatted numbers have been properly rounded.)
+>>>>>>> 87fcf63... io
+
+***** Scientific Notation
+
+Another common concern in scientific programming is the display of numbers in scientific notation:
+
+#+BEGIN_SRC ipython :session
+print('The universal gas constant is {:.2e} J K-1 mol-1'.format(8314.5))
+#+END_SRC
+
+#+RESULTS:
+: The universal gas constant is 8.31e+03 J K-1 mol-1
+
+<<<<<<< HEAD
+The ~e~ denotes we wish to display the number using scientific notation format.
+
+** Reading and Writing Files
+
+Imagine you wish to share the results of your data analysis with the broader scientific community. Your program may have to *write* data to a file so that it can be uploaded to a data archive, for example. Or perhaps, there are data files vital to your reasearch that you want to *read* into your program so that they can be visualized. In these scenarios, it is essential you learn how to write to, and read from files.
+
+*** ~open()~ built-in Function
+
+The first order of business is to understand the [[https://docs.python.org/3/library/functions.html#open][~open()~]] built-in Python function in conjunction with the ~with...as~ Python [[https://docs.python.org/3.1/howto/doanddont.html][idiom]]. Imagine you have some data you wish to share with colleagues. You can write the data contained within the ~data~ variable to the =data.txt= file in this manner:
+=======
+The ~{:.2e}~ field is largely the same as the field we described earlier except the ~e~ denotes we wish to display the number using scientific notation format.
+
+** Reading and Writing Files
+
+Imagine you wish to share the results of your data analysis with the broader scientific community. Your program may have to *write* data to a file so that it can be uploaded to a data archive, for example. Or perhaps, there are data files vital to your research that you want to *read* into your program so that they can be visualized. In these scenarios, it is essential you learn how to write to, and read from files.
+
+*** ~open()~ built-in Function
+
+The first order of business is to understand the [[https://docs.python.org/3/library/functions.html#open][~open()~]] built-in Python function in conjunction with the ~with...as~ Python [[https://docs.python.org/3.1/howto/doanddont.html][idiom]]. Imagine you have some data you wish to share with colleagues. You can write the data contained within a hypothetical ~data~ variable to the =data.txt= file in this manner:
+>>>>>>> 87fcf63... io
+
+#+BEGIN_SRC python :eval no
+  with open("data.txt", 'w') as f:
+      f.write(data)
+#+END_SRC
+
+<<<<<<< HEAD
+Or maybe you have some data you want to analyze. You can read the data from the =data.txt= file into the ~data~ variable.
+=======
+Or maybe you have some data you want to analyze. You can read the contents from the =data.txt= file into the ~data~ variable.
+>>>>>>> 87fcf63... io
+
+#+BEGIN_SRC python :eval no
+  with open("data.txt", 'r') as f:
+      data = f.read()
+#+END_SRC
+
+<<<<<<< HEAD
+The first parameter in the ~open()~ function, in this case =data.txt=, is the file on your computer you wish to read. The second, known as the ~mode~, describes how you want to open the file and, in particular, if you want to read its contents, or if you aim to modify them. The options are ~r~ read only, ~w~ write only, ~a~ append, and ~r+~ read and write. The parameter can be omitted in which case it will be it will default to ~r~, read only mode. Careful with write modes as you can erase files that are already present with the same name.
+
+Here we are using the ~open()~ functions with the ~with ... as~ Python idiom. The purpose of this idiom is to ensure the file is properly closed when you are finished with it. Otherwise, the responsibility of closing the file is left to the programmer with the [[https://docs.python.org/3/library/io.html#io.IOBase.close][close()]] method. The file object which you will need to get your work done appears after the ~as~ keyword. In this case, the file object is ~f~ and will only be available to you in the indented code block following the  ~with ... as~ . Keeping with its batteries included pholosphy, Python will close the file for you when that code bock is done executing.
+
+*** Snow Depth Data Exercise: Reading and Writing in Practice
+You are assigned to analyze [[http://wcc.sc.egov.usda.gov/nwcc/site?sitenum=936][snow depth data from the National Water and Climate Center]] from a  [[http://www.wcc.nrcs.usda.gov/snow/][SNOTEL site]]. Here is a snippet from a  file describing the snow depth data: 
+=======
+The first parameter in the ~open()~ function, in this case =data.txt=, is the file on your computer you wish to read. The second, known as the ~mode~, describes how you want to open the file and, in particular, if you want to read its contents, or if you aim to modify them. The options are ~r~ read only, ~w~ write only, ~a~ append, and ~r+~ read and write. The ~mode~ parameter can be omitted in which case it will default to ~r~, read only mode. Careful with write modes as you can erase files that are already present with the same name.
+
+Here we are using the ~open()~ functions with the ~with ... as~ Python idiom. The purpose of this idiom is to ensure the file is properly closed when you are finished with it. Otherwise, the responsibility of closing the file is left to the programmer with the [[https://docs.python.org/3/library/io.html#io.IOBase.close][close()]] method. The file object, which you will need to get your work done, appears after the ~as~ keyword. In this case, the file object is ~f~ and will only be available to you in the indented code block following the  ~with ... as~ idiom. Keeping with its batteries included philosophy, Python will close the file for you when that code block is done executing.
+
+*** Snow Depth Data Exercise: Reading and Writing in Practice
+You are assigned to analyze [[http://www.wcc.nrcs.usda.gov/][National Water and Climate Center]] snow depth data from [[http://www.wcc.nrcs.usda.gov/snow/][SNOTEL]] [[http://wcc.sc.egov.usda.gov/nwcc/site?sitenum=936][Site 936]], Echo Lake, Colorado, USA. Here is a snippet from a file describing the snow data: 
+>>>>>>> 87fcf63... io
+
+#+BEGIN_Example
+Site Id,Date,Time,WTEQ.I-1 (in) ,PREC.I-1 (in) ,TOBS.I-1 (degC) ,TMAX.D-1 (degC) ,TMIN.D-1 (degC) ,TAVG.D-1 (degC) ,SNWD.I-1 (in) ,
+
+936,2016-04-27,,    10.7,    16.7,    -3.9,     1.7,    -5.8,    -2.7,      34,
+936,2016-04-28,,    10.8,    16.8,    -4.2,     4.3,    -5.3,    -1.7,      36,
+936,2016-04-29,,    10.9,    17.0,    -4.8,    -2.7,    -5.1,    -4.3,      37,
+936,2016-04-30,,    11.4,    17.5,    -6.0,    -2.4,    -6.0,    -4.6,      43,
+936,2016-05-01,,    11.8,    18.0,    -7.4,    -3.1,    -7.5,    -5.6,      48,
+#+END_Example
+
+<<<<<<< HEAD
+The SNOTEL data are expressed in comma-seperated values (CSV) format [[http://wcc.sc.egov.usda.gov/nwcc/sensorhistory?sitenum=936][with the column headers describing the data]]. For example, ~WTEQ.I-1~  is "Snow Water Equivalent" in inches. (Note, the data are in a mixture of English and metric units.) 
+=======
+The SNOTEL data are expressed in comma-separated values (CSV) format [[http://wcc.sc.egov.usda.gov/nwcc/sensorhistory?sitenum=936][with the column headers describing the data]]. For example, ~WTEQ.I-1~  is "Snow Water Equivalent" in inches, and ~SNWD.I-1~ is "Snow Depth" in inches. (Note, the data are in a mixture of English and metric units.) 
+>>>>>>> 87fcf63... io
+
+**** Read the Data File
+Let's examine the ~snow.csv~ data file by reading it with Python.
+
+We are going to open our CSV snow data file with the ~with...as~ Python idiom followed by a nested list comprehension to extract the data:
+
+<<<<<<< HEAD
+#+BEGIN_SRC ipython :session  :export code
+  with open("notebooks/data/snow.csv", 'r') as file:
+      snowdata = [entries for line in file for entries in [line.split(",")]
+              if (len(entries) > 0 and entries[0].isdigit())]
+#+END_SRC
+
+***** List Comprehension Diversion
+
+To read the data into the ~snowdata~ variable, we are using [[https://docs.python.org/3/tutorial/datastructures.html#nested-list-comprehensions][nested list comprehension]]. In Python, list comprehension is a way of processing sequential data structures including lists, tuples and dictionaries. They take getting used to, but it will be worth your time to understand them as they make code clear and concise especially to other Pythonistas. We will deconstruct this nested list comprehension to better understand it.
+
+The first part of the list comprehension, ~for line in file~, loops through every line of the file. Each line is processed sequentually into ~line~ string.
+
+The second part of the list comprehension, ~for entries in [line.split(",")]~, takes the ~line~ that we obtained from the first list comprehension and splits it (according to the commas) into the ~entries~ list. For example, this line:
+=======
+#+BEGIN_SRC ipython :session  :export code :results none
+with open("notebooks/data/snow.csv", 'r') as file:
+    snowdata = [entries for line in file for entries in [line.split(",")]
+                if (len(entries) > 0 and entries[0].isdigit())]
+#+END_SRC
+
+***** List Comprehension Explanation
+
+To read the data into the ~snowdata~ variable, we are using [[https://docs.python.org/3/tutorial/datastructures.html#nested-list-comprehensions][nested list comprehension]]. In Python, list comprehension is a way of processing sequential data structures including lists, tuples and dictionaries. They take getting used to, but it will be worth your time to understand them as they make code clear and concise especially to other Pythonistas. We will deconstruct this nested list comprehension to better understand it.
+
+The entire list comprehension statement is enclosed in brackets: ~[entries ... entries[0].isdigit())]~. The first part of the list comprehension, ~for line in file~, loops through every line of the file. Each line is processed sequentially into the ~line~ string.
+
+The second part of the list comprehension, ~for entries in [line.split(",")]~, takes the ~line~ we obtained from the first list comprehension and splits it (according to the commas) into the ~entries~ list. For example, this line:
+>>>>>>> 87fcf63... io
+
+#+BEGIN_EXAMPLE
+936,2016-04-27,,    10.7,    16.7,    -3.9,     1.7,    -5.8,    -2.7,      34,
+#+END_EXAMPLE
+
+<<<<<<< HEAD
+will be split into this ~entries~ list:
+
+#+BEGIN_SRC ipython :session
+  ["936", "2016-04-27", "", "10.7", "16.7", "-3.9", "1.7", "-5.8", "-2.7", "34"]
+#+END_SRC
+
+The ~if (len(entries) > 0 and entries[0].isdigit())~ part denotes that we only want lines with more than zero entries and that start with a number. This construct helps us get only the lines that contain data and will prevent us from grabbing the header, and will also avoid blank lines.
+
+The end results is a ~snowdata~ variable that looks something like this:
+=======
+will be split into the ~entries~ list:
+
+#+BEGIN_SRC ipython :session :eval no
+  ["936", "2016-04-27", "", "10.7", "16.7", "-3.9", "1.7", "-5.8", "-2.7", "34"]
+#+END_SRC
+
+The ~if (len(entries) > 0 and entries[0].isdigit())~ denotes we only want lines with more than zero entries and that start with a number. This construct helps us get only the lines that contain data and will prevent us from grabbing the header, and will also avoid blank lines.
+
+The end results is a ~snowdata~ variable that looks like this:
+>>>>>>> 87fcf63... io
+
+#+BEGIN_SRC ipython :session :exports results
+  import numpy as np
+  np.set_printoptions(threshold=5)
+<<<<<<< HEAD
+  foo = np.array(snowdata)
+  print(foo)
+=======
+  sarray = np.array(snowdata)
+  print(sarray)
+>>>>>>> 87fcf63... io
+#+END_SRC
+
+#+RESULTS:
+: [['936' '2016-04-26' '' ..., '     3.5' '      34' '\n']
+:  ['936' '2016-04-27' '' ..., '    -2.7' '      34' '\n']
+:  ['936' '2016-04-28' '' ..., '    -1.7' '      36' '\n']
+:  ..., 
+:  ['936' '2016-05-24' '' ..., '     3.3' '      24' '\n']
+:  ['936' '2016-05-25' '' ..., '     4.9' '      24' '\n']
+:  ['936' '2016-05-26' '' ..., '     6.1' '      23' '\n']]
+
+<<<<<<< HEAD
+(The array has been abbreviated with ~...~ for brevity.)  ~snowdata~ is a two-dimensional data structure (a list of lists) with the first dimension representing a row of data from a certain date, and the second dimension represents the individual entries as strings for a row of data.
+
+Now that we have a our SNOTEL data in the ~snowdata~ variable, let's plot it, and write that plot to a file.
+
+**** Writing Files
+
+Here we are going to take the information in the ~snowdata~ variable and create a crude, text based, histogram of the snow depth data over the monthly period
+
+ #+BEGIN_SRC ipython :session
+   print("date\t\t\t\t\tdepth")
+   for d in snowdata:
+       foo = []
+       for _ in range(int(d[-2])):
+           foo.append("*")
+       print(d[1].strip() +"\t", d[-2].strip() + " in", "".join(foo))
+ #+END_SRC
+
+ #+RESULTS:
+ #+begin_example
+ date					depth
+ 2016-04-26	 34 in **********************************
+ 2016-04-27	 34 in **********************************
+ 2016-04-28	 36 in ************************************
+ 2016-04-29	 37 in *************************************
+ 2016-04-30	 43 in *******************************************
+ 2016-05-01	 48 in ************************************************
+ 2016-05-02	 49 in *************************************************
+ 2016-05-03	 43 in *******************************************
+ 2016-05-04	 40 in ****************************************
+ 2016-05-05	 38 in **************************************
+ 2016-05-06	 36 in ************************************
+ 2016-05-07	 34 in **********************************
+ 2016-05-08	 35 in ***********************************
+ 2016-05-09	 35 in ***********************************
+ 2016-05-10	 34 in **********************************
+ 2016-05-11	 33 in *********************************
+ 2016-05-12	 33 in *********************************
+ 2016-05-13	 31 in *******************************
+ 2016-05-14	 30 in ******************************
+ 2016-05-15	 29 in *****************************
+ 2016-05-16	 26 in **************************
+ 2016-05-17	 34 in **********************************
+ 2016-05-18	 33 in *********************************
+ 2016-05-19	 32 in ********************************
+ 2016-05-20	 30 in ******************************
+ 2016-05-21	 28 in ****************************
+ 2016-05-22	 26 in **************************
+ 2016-05-23	 25 in *************************
+ 2016-05-24	 24 in ************************
+ 2016-05-25	 24 in ************************
+ 2016-05-26	 23 in ***********************
+ #+end_example
+=======
+(The list has been abbreviated with ~...~ for clarity.)  ~snowdata~ is a two-dimensional data structure (a list of lists) with the first dimension representing a row of data from a certain date, and the second dimension representing the individual entries as strings for a row of data. The ~\n~ is a newline character that is invisible in the CSV file, but we can see in the ~snowdata~ list. It tells the computer to display subsequent characters on the next line when printing out to the screen or writing to a file.
+
+Now that we have our SNOTEL data in the ~snowdata~ variable, let's plot it, and write that plot to a file.
+
+**** Writing Results to File
+
+In this part of the exercise, we will fetch the data in the ~snowdata~ variable and create a histogram of snow depth over the month long interval. From the header information we examined earlier, we know the snow depth field is in the second to last column (remember the ~\n~ newline character is in the last column). We have not yet learned about [[http://matplotlib.org/][matplotlib]] so we will rely upon our newly acquired knowledge of strings to make a text-based histogram. Each bin of the histogram, built by repeating the ~-~ character according to the snow depth, will be on a separate horizontal line of text. 
+
+To create our histogram, we will gradually build up a lengthy string as we loop through the snow depth data building our histogram bins. Remember, strings are immutable so you cannot append to them without creating a new string as you loop through the data which is inefficient and frowned upon. Instead, there is a preferred (a.k.a. idiomatic) approach  to build such strings with Python. Create an empty list (which is mutable), and append strings to that list. Finally, call the string [[https://docs.python.org/3/library/stdtypes.html#str.join][~join()~]] method to link all the strings contained in the list together into one big string. For example,
+
+#+BEGIN_SRC ipython :session
+  # create an empty list
+  storms = []
+  # append strings to that list
+  storms.append('hurricane')
+  storms.append('cyclone')
+  storms.append('typhoon')
+
+  # join the strings together separated by commas
+  s = ', '.join(storms)
+  print(s)
+#+END_SRC
+
+#+RESULTS:
+: hurricane, cyclone, typhoon
+
+With this knowledge of programatically building long strings, we can create our histogram. As we just described, we will create an empty list called ~lines~ and we will first append the header information. Then we will write a for loop to iterate through the snow data into the ~d~ variable (which is a list of the individual row entries) to grab the date (at index 1) and the depth in the second to last column which we will obtain with the [[https://docs.python.org/3/faq/programming.html#what-s-a-negative-index][negative index trick]] (~d[-2]~). Finally, we will create our histogram bins by repeating the "-" character according to the snow depth. Python allows strings to be "multiplied" to repeat them. For example, @@html:<code>@@"Z" * 4@@html:</code>@@ results in @@html:<code>@@"ZZZZ"@@html:</code>@@. We will use this tactic to build the bin. Note, we have to convert the snow depth string to an integer with the [[https://docs.python.org/3/library/functions.html#int][~int()~]] function.
+
+#+BEGIN_SRC ipython :session :results none :exports code
+  # lines empty list
+  lines = []
+  # append the header
+  lines.append("SNOTEL Site 936, Echo Lake, Colorado, USA")
+  lines.append("")
+  lines.append("{:<12}{:<4}".format("date", "snow depth (inches)"))
+  # append the snow depth bins
+  for d in snowdata:
+      lines.append("{:<12}{:<4}{}".format(d[1], d[-2].strip(), "-" * int(d[-2])))
+  # join on newline so that each string in the lines list appears on a new line
+  histogram = "\n".join(lines)
+#+END_SRC
+
+We also take advantage of more positional formatting features (e.g., ~{:<12}~ and ~{:<4}~) to consistently pad the strings so that the header and data align.
+
+We can now print our histogram!
+
+#+BEGIN_SRC ipython :session
+  print(histogram)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+SNOTEL Site 936, Echo Lake, Colorado, USA
+
+date        snow depth (inches)
+2016-04-26  34  ----------------------------------
+2016-04-27  34  ----------------------------------
+2016-04-28  36  ------------------------------------
+2016-04-29  37  -------------------------------------
+2016-04-30  43  -------------------------------------------
+2016-05-01  48  ------------------------------------------------
+2016-05-02  49  -------------------------------------------------
+2016-05-03  43  -------------------------------------------
+2016-05-04  40  ----------------------------------------
+2016-05-05  38  --------------------------------------
+2016-05-06  36  ------------------------------------
+2016-05-07  34  ----------------------------------
+2016-05-08  35  -----------------------------------
+2016-05-09  35  -----------------------------------
+2016-05-10  34  ----------------------------------
+2016-05-11  33  ---------------------------------
+2016-05-12  33  ---------------------------------
+2016-05-13  31  -------------------------------
+2016-05-14  30  ------------------------------
+2016-05-15  29  -----------------------------
+2016-05-16  26  --------------------------
+2016-05-17  34  ----------------------------------
+2016-05-18  33  ---------------------------------
+2016-05-19  32  --------------------------------
+2016-05-20  30  ------------------------------
+2016-05-21  28  ----------------------------
+2016-05-22  26  --------------------------
+2016-05-23  25  -------------------------
+2016-05-24  24  ------------------------
+2016-05-25  24  ------------------------
+2016-05-26  23  -----------------------
+#+end_example
+
+What does this visual representation of the snow depth data tell you? What conclusions can you draw or what additional questions do these data produce? What happened on the 17th of May?
+
+We will finally write out the entire histogram to a file completing the exercise.
+
+#+BEGIN_SRC python :results none :exports code
+  with open("notebooks/data/histogram.txt", 'w') as f:
+      f.write(histogram)
+#+END_SRC
+>>>>>>> 87fcf63... io
