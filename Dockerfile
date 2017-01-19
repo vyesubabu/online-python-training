@@ -4,6 +4,10 @@ MAINTAINER Ryan May <rmay@ucar.edu>
 
 USER main
 
+# .jupyter
+RUN mkdir -p ~/.jupyter
+COPY jupyter_notebook_config.py ~/.jupyter
+
 # Update conda.
 RUN conda update conda --yes
 ADD environment.yml environment.yml
